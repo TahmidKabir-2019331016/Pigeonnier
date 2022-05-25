@@ -36,3 +36,8 @@
     -fx-border-style: none;
     -fx-focus-traversable: all 0.4s ease 0s;
 }
+#login:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: black;
+    transition: all 0.4s ease 0s;
+}

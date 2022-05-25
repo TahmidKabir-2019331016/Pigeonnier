@@ -1,0 +1,14 @@
+.big {
+    -fx-pref-height: 100vh;
+    /*This part is important for centering*/
+    -fx-content-display: center;
+    -fx-place-items: center;
+    -fx-pref-width: 22ch;
+    -fx-animated: true;
+    -fx-animation: typing 2s steps(22), blink .5s step-end infinite alternate;
+    -fx-white-space: nowrap;
+    -fx-overflow: hidden;
+    -fx-border-right: 3px solid;
+    -fx-font-family: monospace;
+    -fx-font-size: 2em;
+}

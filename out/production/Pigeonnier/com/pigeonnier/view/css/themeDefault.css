@@ -1,0 +1,43 @@
+.root {
+    -fx-accent: lightblue;
+}
+
+.big {
+    -fx-font-size: 20pt;
+    -fx-font-color: blue;
+}
+
+.label{
+    -fx-text-fill: black;
+    -fx-font-size: 10pt;
+}
+
+.button{
+    -fx-focus-traversable: false;
+}
+
+.button:hover{
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
+}
+
+.slider .track:hover {
+    -fx-background-color: lightgray;
+}
+#login {
+    -fx-start-margin: 30px;
+    -fx-font-family: 'Poppins';
+    -fx-text-fill: #fff !important;
+    -fx-font-weight: 700;
+    -fx-background-color: #60a3bc;
+    -fx-padding: 20px;
+    -fx-border-radius: 50px;
+    -fx-content-display: inline-block;
+    -fx-border-style: none;
+    -fx-focus-traversable: all 0.4s ease 0s;
+}
+#login:hover {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: black;
+    transition: all 0.4s ease 0s;
+}

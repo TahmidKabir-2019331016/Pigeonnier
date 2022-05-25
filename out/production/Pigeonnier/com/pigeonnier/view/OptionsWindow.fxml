@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="341.0" prefWidth="453.0" styleClass="container" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Slider fx:id="FontPicker" blockIncrement="1.0" layoutX="95.0" layoutY="90.0" majorTickUnit="1.0" max="2.0" minorTickCount="0" prefHeight="32.0" prefWidth="333.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" AnchorPane.bottomAnchor="234.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="90.0" />
+      <ChoiceBox fx:id="ThemePicker" layoutX="95.0" layoutY="171.0" prefHeight="37.0" prefWidth="333.0" AnchorPane.bottomAnchor="153.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="171.0" />
+      <Label layoutX="27.0" layoutY="83.0" prefHeight="32.0" prefWidth="48.0" text="Font:" AnchorPane.bottomAnchor="226.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="378.0" AnchorPane.topAnchor="83.0" />
+      <Label layoutX="27.0" layoutY="131.0" prefHeight="60.0" prefWidth="51.0" text="Theme:" AnchorPane.bottomAnchor="112.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="296.0" AnchorPane.topAnchor="131.0" />
+      <Button layoutX="322.0" layoutY="302.0" mnemonicParsing="false" onAction="#ApplyAction" prefHeight="37.0" prefWidth="106.0" text="Apply" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="322.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="302.0" />
+      <Button layoutX="174.0" layoutY="301.0" mnemonicParsing="false" onAction="#CancelAction" prefHeight="37.0" prefWidth="106.0" text="Cancel" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="301.0" />
+      <Label layoutX="204.0" layoutY="14.0" prefHeight="62.0" prefWidth="152.0" styleClass="big" text="Options" AnchorPane.bottomAnchor="285.0" AnchorPane.leftAnchor="204.0" AnchorPane.rightAnchor="97.0" AnchorPane.topAnchor="14.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="407.0" prefWidth="523.0" styleClass="container" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Button fx:id="login" layoutX="203.0" layoutY="281.0" onAction="#LoginButtonAction" prefHeight="42.0" prefWidth="94.0" text="Login" />
+        <Label layoutX="53.0" layoutY="145.0" prefHeight="23.0" prefWidth="42.0" text="Email:" />
+        <Label layoutX="53.0" layoutY="188.0" prefHeight="23.0" prefWidth="64.0" text="Password:" />
+        <TextField fx:id="EmailTextField" layoutX="151.0" layoutY="144.0" prefHeight="26.0" prefWidth="294.0" />
+      <Label fx:id="ErrorLabel" layoutX="196.0" layoutY="389.0" />
+      <PasswordField fx:id="PasswordTextField" layoutX="151.0" layoutY="187.0" prefHeight="26.0" prefWidth="294.0" />
+      <Label fx:id="welcome" layoutX="124.0" layoutY="47.0" prefHeight="56.0" prefWidth="329.0" styleClass="big" text="Welcome to Pigeonnier" />
+    </children>
+
+</AnchorPane>

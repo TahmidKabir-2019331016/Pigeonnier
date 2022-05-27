@@ -27,7 +27,6 @@
 
 #login {
     -fx-start-margin: 30px;
-
     -fx-font-family: 'Poppins';
     -fx-text-fill: #fff !important;
     -fx-font-weight: 700;
@@ -37,4 +36,8 @@
     -fx-content-display: inline-block;
     -fx-border-style: none;
     -fx-focus-traversable: all 0.4s ease 0s;
+}
+#login:hover {
+    -fx-background-color: black;
+    -fx-text-fill: white;
 }

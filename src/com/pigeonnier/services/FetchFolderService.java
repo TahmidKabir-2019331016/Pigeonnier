@@ -4,6 +4,11 @@ import com.pigeonnier.model.EmailTreeItem;
 import com.pigeonnier.view.IconResolver;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -66,6 +71,17 @@ public class FetchFolderService extends Service<Void> {
                     try {
                         Message message = folder.getMessage(folder.getMessageCount() - i);
                         treeItem.addMessageToTop(message);
+                        Notifications notifications = Notifications.create().title("New Message!").text("You Have New Message from " + message.getFrom()[0].toString());
+                        notifications.graphic(null);
+                        notifications.hideAfter(Duration.seconds(2));
+                        notifications.position(Pos.BOTTOM_RIGHT);
+                        notifications.onAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                System.out.println("Notification Clicked!");
+                            }
+                        });
+                        notifications.showConfirm();
                     } catch (MessagingException e) {
                         throw new RuntimeException(e);
                     }

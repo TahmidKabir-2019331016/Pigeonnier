@@ -10,5 +10,6 @@
     <orderEntry type="library" name="javafx-swt" level="project" />
     <orderEntry type="library" name="javax.mail" level="project" />
     <orderEntry type="library" name="activation" level="project" />
+    <orderEntry type="library" name="controlsfx-8.40.11" level="project" />
   </component>
 </module>

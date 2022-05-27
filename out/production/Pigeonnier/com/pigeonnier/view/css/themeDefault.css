@@ -7,16 +7,16 @@
     -fx-font-color: blue;
 }
 
-.label{
+.label {
     -fx-text-fill: black;
     -fx-font-size: 10pt;
 }
 
-.button{
+.button {
     -fx-focus-traversable: false;
 }
 
-.button:hover{
+.button:hover {
     -fx-background-color: lightgray;
     -fx-text-fill: black;
 }
@@ -24,6 +24,7 @@
 .slider .track:hover {
     -fx-background-color: lightgray;
 }
+
 #login {
     -fx-start-margin: 30px;
     -fx-font-family: 'Poppins';
@@ -37,7 +38,6 @@
     -fx-focus-traversable: all 0.4s ease 0s;
 }
 #login:hover {
-    -fx-text-fill: #ffffff;
     -fx-background-color: black;
-    transition: all 0.4s ease 0s;
+    -fx-text-fill: white;
 }

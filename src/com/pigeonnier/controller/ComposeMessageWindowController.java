@@ -8,17 +8,23 @@ import com.pigeonnier.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import javafx.scene.web.HTMLEditor;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ComposeMessageWindowController extends BaseController implements Initializable {
-
+    List<File> attachments = new ArrayList<>();
     public ComposeMessageWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
         super(emailManager, viewFactory, fxmlName);
     }
@@ -39,6 +45,21 @@ public class ComposeMessageWindowController extends BaseController implements In
     private ChoiceBox<EmailAccount> accountChoiceBox;
 
     @FXML
+    private HBox attachmentHBox;
+
+    @FXML
+    void addAttachment(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if(selectedFile != null) {
+            attachments.add(selectedFile);
+            Button button = new Button(selectedFile.getName());
+            attachmentHBox.getChildren().add(button);
+        }
+    }
+
+
+    @FXML
     void sendButtonAction(ActionEvent event) {
 //        System.out.println(htmlEditor.getHtmlText());
         System.out.println("Send Button Clicked!");
@@ -47,7 +68,8 @@ public class ComposeMessageWindowController extends BaseController implements In
                 accountChoiceBox.getValue(),
                 htmlEditor.getHtmlText(),
                 subjectTextView.getText(),
-                recipientTextFIeld.getText()
+                recipientTextFIeld.getText(),
+                attachments
         );
 
         emailComposerService.start();

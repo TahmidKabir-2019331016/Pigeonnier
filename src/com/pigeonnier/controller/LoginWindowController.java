@@ -4,8 +4,6 @@ import com.pigeonnier.EmailManager;
 import com.pigeonnier.model.EmailAccount;
 import com.pigeonnier.services.LoginService;
 import com.pigeonnier.view.ViewFactory;
-import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

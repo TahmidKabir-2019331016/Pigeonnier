@@ -6,6 +6,7 @@ module Pigeonnier {
     requires java.mail;
     requires activation;
     requires controlsfx;
+    requires java.desktop;
 
     opens com.pigeonnier;
     opens com.pigeonnier.view;

@@ -76,15 +76,17 @@ public class EmailMessages {
 
     /**
      * Adds attachments to message
-     * @param mbp
+     * @param mbp: MimeBodyPart
      */
     public void addAttachments(MimeBodyPart mbp) {
         hasAttachments = true;
-        attachmentList.add(mbp);
-        try {
-            System.out.println("Attachment Added " + mbp.getFileName());
-        } catch (MessagingException e) {
-            e.printStackTrace();
+        if(!attachmentList.contains(mbp)) {
+            attachmentList.add(mbp);
+            try {
+                System.out.println("Attachment Added " + mbp.getFileName());
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

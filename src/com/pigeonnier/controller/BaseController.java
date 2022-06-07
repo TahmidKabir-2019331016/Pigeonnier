@@ -3,7 +3,7 @@ package com.pigeonnier.controller;
 import com.pigeonnier.EmailManager;
 import com.pigeonnier.view.ViewFactory;
 
-public abstract class BaseController {
+public class BaseController {
     protected EmailManager emailManager;
     protected ViewFactory viewFactory;
     private String FxmlName;

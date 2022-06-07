@@ -4,6 +4,8 @@ import com.pigeonnier.EmailManager;
 import com.pigeonnier.model.EmailMessages;
 import com.pigeonnier.services.MessageRenderer;
 import com.pigeonnier.view.ViewFactory;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -14,6 +16,9 @@ import javafx.scene.web.WebView;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeBodyPart;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -59,9 +64,9 @@ public class MessageDetailsWindowController extends BaseController implements In
     }
 
     private void loadAttachments(EmailMessages emailMessages) throws MessagingException {
-        if(emailMessages.isHasAttachments()) {
-            for(MimeBodyPart mimeBodyPart: emailMessages.getAttachmentList()) {
-                Button button = new Button(mimeBodyPart.getFileName());
+        if (emailMessages.isHasAttachments()) {
+            for (MimeBodyPart mimeBodyPart : emailMessages.getAttachmentList()) {
+                CustomButton button = new CustomButton(mimeBodyPart);
                 hBoxForAttachments.getChildren().add(button);
             }
         } else {
@@ -69,5 +74,50 @@ public class MessageDetailsWindowController extends BaseController implements In
         }
     }
 
+    private class CustomButton extends Button {
+        MimeBodyPart mimeBodyPart;
+        String downloadPath;
+        File file;
+        Desktop desktop;
+        public CustomButton(MimeBodyPart mimeBodyPart) throws MessagingException {
+            this.mimeBodyPart = mimeBodyPart;
+            this.setText(mimeBodyPart.getFileName());
+            this.downloadPath = LOCATION_OF_DOWNLOAD + mimeBodyPart.getFileName();
+            file = new File(downloadPath);
+            desktop = Desktop.getDesktop();
+            this.setOnAction(event -> downloadAttachment());
+        }
+
+        private void openCurrentFile() {
+                try {
+                    desktop.open(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        private void downloadAttachment() {
+            if(!file.exists()) {
+                this.setStyle("-fx-background-color: lightblue");
+                Service service = new Service() {
+                    @Override
+                    protected Task createTask() {
+                        return new Task() {
+                            @Override
+                            protected Object call() throws Exception {
+                                mimeBodyPart.saveFile(downloadPath);
+                                return null;
+                            }
+                        };
+                    }
+                };
+                service.restart();
+                service.setOnSucceeded(event2 -> {
+                    this.setStyle("-fx-background-color: lightgreen");
+                });
+            }
+            openCurrentFile();
+        }
+    }
 
 }

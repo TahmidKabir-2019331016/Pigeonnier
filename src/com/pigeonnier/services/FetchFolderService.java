@@ -16,6 +16,7 @@ import javax.mail.MessagingException;
 import javax.mail.Store;
 import javax.mail.event.MessageCountEvent;
 import javax.mail.event.MessageCountListener;
+import java.awt.*;
 import java.util.List;
 
 public class FetchFolderService extends Service<Void> {
@@ -44,7 +45,7 @@ public class FetchFolderService extends Service<Void> {
     private void fetchFolders() throws MessagingException {
         Folder[] folders = store.getDefaultFolder().list();
         handleFolders(folders, foldersRoot);
-
+//        foldersRoot.getChildren().add(new Button("hudai"));
     }
 
     private void handleFolders(Folder[] folders, EmailTreeItem<String> foldersRoot) throws MessagingException {

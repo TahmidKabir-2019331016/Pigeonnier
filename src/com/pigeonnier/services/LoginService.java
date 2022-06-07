@@ -38,7 +38,7 @@ public class LoginService extends Service<LoginResults> {
         try {
             Session session = Session.getInstance(emailAccount.getProperties(), authenticator);
             emailAccount.setSession(session);
-            Store store = session.getStore("imaps");
+            Store store = session.getStore("imap");
             store.connect(emailAccount.getProperties().getProperty("incomingHost"), emailAccount.getAddress(), emailAccount.getPassword());
             emailAccount.setStore(store);
             emailManager.addEmailAccount(emailAccount);

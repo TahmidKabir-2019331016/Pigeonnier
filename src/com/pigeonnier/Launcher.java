@@ -1,4 +1,4 @@
-package com.pigeonnier;;
+package com.pigeonnier;
 
 import com.pigeonnier.model.EmailAccount;
 import com.pigeonnier.model.EmailMessages;

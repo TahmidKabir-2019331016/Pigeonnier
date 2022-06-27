@@ -92,9 +92,30 @@ public class ComposeMessageWindowController extends BaseController implements In
         setUpChoiceBox();
     }
 
-    private void setUpChoiceBox() {
+    public void setUpChoiceBox() {
         accountChoiceBox.setItems(emailManager.getEmailAccountsList());
-        accountChoiceBox.setValue(emailManager.getEmailAccountsList().get(0));
+        int index = 0;
+        for(EmailAccount account: emailManager.getEmailAccountsList()) {
+            if(account.getAddress().contains(emailManager.currentEmail.getAddress())) {
+                break;
+            }
+            index++;
+        }
+        if(index == emailManager.getEmailAccountsList().size()) index = 0;
+        accountChoiceBox.setValue(emailManager.getEmailAccountsList().get(index));
     }
+
+//    public void setUpChoiceBox() {
+//        accountChoiceBox.setItems(emailManager.getEmailAccountsList());
+//        int index = 0;
+//        for(EmailAccount account: emailManager.getEmailAccountsList()) {
+//            if(account.getAddress().contains(emailManager.currentEmail)) {
+//                break;
+//            }
+//            index++;
+//        }
+//        if(index == emailManager.getEmailAccountsList().size()) index = 0;
+//        accountChoiceBox.setValue(emailManager.getEmailAccountsList().get(index));
+//    }
 
 }

@@ -7,6 +7,7 @@ import com.pigeonnier.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -27,6 +28,9 @@ public class LoginWindowController extends BaseController implements Initializab
     private PasswordField PasswordTextField;
     @FXML
     private Label welcome;
+    @FXML
+    private CheckBox checkBox;
+    private EmailAccount emailAccount;
 
     public LoginWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
         super(emailManager, viewFactory, fxmlName);
@@ -38,15 +42,14 @@ public class LoginWindowController extends BaseController implements Initializab
 //        PasswordTextField.setText("nozxuulofqrcwxiw");
         EmailTextField.setText("tahmidkabiraddin@gmail.com");
         PasswordTextField.setText("tkmhgmvcxotmhawy");
-
     }
 
     @FXML
-    void LoginButtonAction(ActionEvent event) throws InterruptedException {
+    void LoginButtonAction() throws InterruptedException {
         ErrorLabel.setText("");
         System.out.println("Login Button Clicked!");
         if (isValid()) {
-            EmailAccount emailAccount = new EmailAccount(EmailTextField.getText(), PasswordTextField.getText());
+            emailAccount = new EmailAccount(EmailTextField.getText(), PasswordTextField.getText());
             LoginService loginService = new LoginService(emailAccount, emailManager);
             loginService.start();
             loginService.setOnSucceeded(event1 -> {
@@ -54,6 +57,7 @@ public class LoginWindowController extends BaseController implements Initializab
 
                 switch (loginResults) {
                     case SUCCESS -> {
+                        if(checkBox.isSelected()) emailManager.getLoggedInList().add(emailAccount);
                         System.out.println("login successful!");
                         if(!viewFactory.isMainWindowOpened()) {
                             viewFactory.showMainWindow();
@@ -75,7 +79,7 @@ public class LoginWindowController extends BaseController implements Initializab
             ErrorLabel.setText("Please Fill your email");
             return false;
         }
-        if (PasswordTextField.getText().isBlank()) {
+        if (PasswordTextField.getText().isEmpty()) {
             ErrorLabel.setText("Please Fill your password");
             return false;
         }

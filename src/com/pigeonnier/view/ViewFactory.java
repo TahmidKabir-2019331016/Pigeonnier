@@ -15,6 +15,7 @@ public class ViewFactory {
 
     private EmailManager emailManager;
     private ArrayList<Stage> activeStages;
+    public ComposeMessageWindowController composeMessageWindowController;
     private boolean isMainWindowOpened;
     //Options Window Handling
     ColorTheme colorTheme = ColorTheme.Default;
@@ -58,7 +59,7 @@ public class ViewFactory {
 
     public void showMainWindow() {
         BaseController controller = new MainWindowController(emailManager, this, "MainWindow.fxml");
-
+        isMainWindowOpened = true;
         InitializeStage(controller);
     }
 
@@ -70,7 +71,7 @@ public class ViewFactory {
 
     public void showComposeMessageWindow() {
         BaseController controller = new ComposeMessageWindowController(emailManager, this, "ComposeMessageWindow.fxml");
-
+        composeMessageWindowController = (ComposeMessageWindowController) controller;
         InitializeStage(controller);
     }
 
@@ -115,4 +116,6 @@ public class ViewFactory {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource(FontSize.getPath(fontSize))).toExternalForm());
         }
     }
+
+
 }

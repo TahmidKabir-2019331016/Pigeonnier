@@ -19,11 +19,11 @@ import java.util.List;
 public class EmailManager {
 
     private IconResolver iconResolver = new IconResolver();
+    public EmailAccount currentEmail;
     private EmailMessages selectedMessage;
-
     private EmailTreeItem<String> selectedFolder;
     //Handling Folders
-    private EmailTreeItem<String> foldersRoot = new EmailTreeItem<>("");
+    private EmailTreeItem<String> foldersRoot = new EmailTreeItem<>("Root");
 
     public TreeItem<String> getFoldersRoot() {
         return foldersRoot;
@@ -32,11 +32,15 @@ public class EmailManager {
     private List<Folder> folderList = new ArrayList<>();
 
     private ObservableList<EmailAccount> emailAccountsList = FXCollections.observableArrayList();
+    private List<EmailAccount> loggedInList = new ArrayList<>();
+    private List<EmailAccount> loggedOutList = new ArrayList<>();
 
+    public List<EmailAccount> getLoggedOutList() {
+        return loggedOutList;
+    }
     public ObservableList<EmailAccount> getEmailAccountsList() {
         return emailAccountsList;
     }
-
     public List<Folder> getFolderList() {
         return folderList;
     }
@@ -59,12 +63,21 @@ public class EmailManager {
         this.selectedFolder = selectedFolder;
     }
 
+    public List<EmailAccount> getLoggedInList() {
+        return loggedInList;
+    }
+
+    public void setLoggedInList(List<EmailAccount> loggedInList) {
+        this.loggedInList = loggedInList;
+    }
+
     public EmailManager() {
         folderUpdaterService = new FolderUpdaterService(folderList);
         folderUpdaterService.start();
     }
 
     public void addEmailAccount(EmailAccount emailAccount) {
+        emailAccount = emailAccount;
         emailAccountsList.add(emailAccount);
         EmailTreeItem<String> treeItem = new EmailTreeItem<>(emailAccount.getAddress());
         treeItem.setGraphic(iconResolver.getIconForFolder(emailAccount.getAddress()));
@@ -104,5 +117,9 @@ public class EmailManager {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    public void removeAccount() {
+        loggedOutList.add(currentEmail);
     }
 }

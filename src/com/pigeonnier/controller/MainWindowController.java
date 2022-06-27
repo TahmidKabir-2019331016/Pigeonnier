@@ -1,22 +1,28 @@
 package com.pigeonnier.controller;
 
 import com.pigeonnier.EmailManager;
+import com.pigeonnier.model.EmailAccount;
 import com.pigeonnier.model.EmailMessages;
 import com.pigeonnier.model.EmailTreeItem;
 import com.pigeonnier.model.SizeInteger;
 import com.pigeonnier.services.MessageRenderer;
 import com.pigeonnier.view.ColorTheme;
 import com.pigeonnier.view.ViewFactory;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainWindowController extends BaseController implements Initializable {
@@ -44,7 +50,6 @@ public class MainWindowController extends BaseController implements Initializabl
     private TableColumn<EmailMessages, String> subjectCol;
     @FXML
     private TreeView<String> emailsTreeView;
-
     @FXML
     private WebView emailsWebView;
 
@@ -122,11 +127,32 @@ public class MainWindowController extends BaseController implements Initializabl
         emailsTreeView.setOnMouseClicked(event -> {
             EmailTreeItem<String> item = (EmailTreeItem<String>) emailsTreeView.getSelectionModel().getSelectedItem();
             if (item != null) {
+                for(EmailAccount emailAccount: emailManager.getEmailAccountsList()) {
+                    if (emailAccount.getAddress().equals(item.getParent().getValue())) {
+                        emailManager.currentEmail = emailAccount;
+                        break;
+                    }
+                }
                 emailManager.setSelectedFolder(item);
                 emailsTableView.setItems(item.getEmailMessages());
+                if (item.getValue().contains("Compose")) {
+                    viewFactory.showComposeMessageWindow();
+                    viewFactory.composeMessageWindowController.setUpChoiceBox();
+                } else if (item.getValue().contains("Logout")) {
+                    emailManager.removeAccount();
+                    removeItem(item);
+                }
             }
 
         });
+    }
+
+    private void removeItem(EmailTreeItem<String> item) {
+        while (!item.getValue().contains("Root")) {
+            EmailTreeItem<String> temp = (EmailTreeItem<String>) item.getParent();
+            item.getParent().getChildren().remove(item);
+            item = temp;
+        }
     }
 
     private void setUpTableView() {
@@ -156,7 +182,28 @@ public class MainWindowController extends BaseController implements Initializabl
 
     @FXML
     void composeMessageAction(ActionEvent event) {
+        emailManager.currentEmail = emailManager.getEmailAccountsList().get(0);
         viewFactory.showComposeMessageWindow();
     }
 
+    /**
+     * This function will show an alert dialog box to exit from teh application with OK and CANCEL option.
+     * If Ok is selected It will close the application.
+     */
+    @FXML
+    void ExitFromApp() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Confirm Exit");
+        alert.setHeaderText("Are you sure you want to exit?");
+        ButtonType cancelButtonType = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getDialogPane().getButtonTypes().add(cancelButtonType);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent()) {
+            if (result.get().equals(ButtonType.OK))
+                Platform.exit();
+            else alert.close();
+        }
+    }
+
 }
+

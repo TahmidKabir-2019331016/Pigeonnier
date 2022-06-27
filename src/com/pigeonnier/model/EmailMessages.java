@@ -1,9 +1,7 @@
 package com.pigeonnier.model;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.css.Size;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;

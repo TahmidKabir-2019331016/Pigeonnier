@@ -20,6 +20,10 @@ public class IconResolver {
                 imageView = new ImageView(new Image(getClass().getResourceAsStream("icons/spam.png")));
             } else if (lowerCaseFolderName.contains("sent")) {
                 imageView = new ImageView(new Image(getClass().getResourceAsStream("icons/sent2.png")));
+            }else if (lowerCaseFolderName.contains("compose")) {
+                imageView = new ImageView(new Image(getClass().getResourceAsStream("icons/compose.png")));
+            }else if (lowerCaseFolderName.contains("logout")) {
+                imageView = new ImageView(new Image(getClass().getResourceAsStream("icons/logout.png")));
             } else {
                 imageView = new ImageView(new Image(getClass().getResourceAsStream("icons/folder.png")));
             }

@@ -1,15 +1,12 @@
 package com.pigeonnier;
 
 import com.pigeonnier.model.EmailAccount;
-import com.pigeonnier.model.EmailMessages;
 import com.pigeonnier.persistence.PersistenceAccess;
 import com.pigeonnier.persistence.ValidAccount;
 import com.pigeonnier.services.LoginService;
 import com.pigeonnier.view.ViewFactory;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -30,6 +27,7 @@ public class Launcher extends Application {
         } else {
             for(ValidAccount validAccount: list) {
                 EmailAccount emailAccount = new EmailAccount(validAccount.getAddress(), validAccount.getPassword());
+                emailManager.getLoggedInList().add(emailAccount);
                 LoginService loginService = new LoginService(emailAccount, emailManager);
                 loginService.start();
             }
@@ -45,9 +43,13 @@ public class Launcher extends Application {
     @Override
     public void stop() throws Exception {
         List<ValidAccount> list = new ArrayList<>();
-
-        for(EmailAccount emailAccount: emailManager.getEmailAccountsList()) {
-            list.add(new ValidAccount(emailAccount.getAddress(), emailAccount.getPassword()));
+        List<EmailAccount> loggedOutList = emailManager.getLoggedOutList();
+        List<EmailAccount> loggedInList = emailManager.getLoggedInList();
+        ObservableList<EmailAccount> accountList = emailManager.getEmailAccountsList();
+        for(EmailAccount emailAccount: accountList) {
+            if(!loggedOutList.contains(emailAccount) && loggedInList.contains(emailAccount)) {
+                list.add(new ValidAccount(emailAccount.getAddress(), emailAccount.getPassword()));
+            }
         }
 
         persistenceAccess.saveToPersistence(list);

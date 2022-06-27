@@ -45,7 +45,12 @@ public class FetchFolderService extends Service<Void> {
     private void fetchFolders() throws MessagingException {
         Folder[] folders = store.getDefaultFolder().list();
         handleFolders(folders, foldersRoot);
-//        foldersRoot.getChildren().add(new Button("hudai"));
+        EmailTreeItem composeTreeItem = new EmailTreeItem("Compose Message");
+        composeTreeItem.setGraphic(iconResolver.getIconForFolder("Compose"));
+        foldersRoot.getChildren().add(composeTreeItem);
+        EmailTreeItem logoutTreeItem = new EmailTreeItem("Logout");
+        logoutTreeItem.setGraphic(iconResolver.getIconForFolder("logout"));
+        foldersRoot.getChildren().add(logoutTreeItem);
     }
 
     private void handleFolders(Folder[] folders, EmailTreeItem<String> foldersRoot) throws MessagingException {

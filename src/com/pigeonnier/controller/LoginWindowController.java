@@ -40,8 +40,8 @@ public class LoginWindowController extends BaseController implements Initializab
     public void initialize(URL location, ResourceBundle resources) {
 //        EmailTextField.setText("tahmidkabiraddin@yahoo.com");
 //        PasswordTextField.setText("nozxuulofqrcwxiw");
-        EmailTextField.setText("tahmidkabiraddin@gmail.com");
-        PasswordTextField.setText("tkmhgmvcxotmhawy");
+//        EmailTextField.setText("tahmidkabiraddin@gmail.com");
+//        PasswordTextField.setText("tkmhgmvcxotmhawy");
     }
 
     @FXML

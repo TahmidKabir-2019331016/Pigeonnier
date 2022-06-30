@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>D:\Academic\JAVA\Code\Pigeonnier\out\artifacts\Pigeonnier_jar\Pigeonnier.jar</jar>
+  <outfile>C:\Users\tahmi\OneDrive\Desktop\Pigeonnier.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\tahmi\Downloads\icons8_pigeon_64_eSo_icon.ico</icon>
+  <jre>
+    <path>C:\Program Files\Java\jdk-18.0.1.1\bin</path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+    <opt>--module-path D:\Academic\JAVA\openjfx-18.0.1_windows-x64_bin-sdk\javafx-sdk-18.0.1\lib --add-modules javafx.controls,javafx.fxml,javafx.graphics,javafx.web</opt>
+  </jre>
+</launch4jConfig>

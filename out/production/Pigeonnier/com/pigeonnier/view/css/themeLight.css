@@ -11,6 +11,7 @@
 .container{
     -fx-background-color: -fx-my-background-color-color;
 }
+
 .errorText{
     -fx-text-fill: -fx-my-error-text-fill;
     -fx-font-weight: bold;

@@ -7,10 +7,7 @@ import com.pigeonnier.view.ViewFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -30,6 +27,9 @@ public class LoginWindowController extends BaseController implements Initializab
     private Label welcome;
     @FXML
     private CheckBox checkBox;
+
+    @FXML
+    private Button login;
     private EmailAccount emailAccount;
 
     public LoginWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlName) {
@@ -47,6 +47,7 @@ public class LoginWindowController extends BaseController implements Initializab
     @FXML
     void LoginButtonAction() throws InterruptedException {
         ErrorLabel.setText("");
+        login.setVisible(false);
         System.out.println("Login Button Clicked!");
         if (isValid()) {
             emailAccount = new EmailAccount(EmailTextField.getText(), PasswordTextField.getText());
@@ -54,7 +55,7 @@ public class LoginWindowController extends BaseController implements Initializab
             loginService.start();
             loginService.setOnSucceeded(event1 -> {
                 LoginResults loginResults = loginService.getValue();
-
+                login.setVisible(true);
                 switch (loginResults) {
                     case SUCCESS -> {
                         if(checkBox.isSelected()) emailManager.getLoggedInList().add(emailAccount);

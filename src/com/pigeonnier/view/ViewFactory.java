@@ -50,36 +50,54 @@ public class ViewFactory {
     public void setMainWindowOpened(boolean mainWindowOpened) {
         isMainWindowOpened = mainWindowOpened;
     }
-
+    /**
+     * Initializes login window.
+     */
     public void showLoginWindow() {
         BaseController controller = new LoginWindowController(emailManager, this, "LoginWindow.fxml");
 
         InitializeStage(controller);
     }
 
+    /**
+     * Initializes Main Window.
+     */
     public void showMainWindow() {
         BaseController controller = new MainWindowController(emailManager, this, "MainWindow.fxml");
         isMainWindowOpened = true;
         InitializeStage(controller);
     }
 
+    /**
+     * Initializes Options Window.
+     */
     public void showOptionsWindow() {
         BaseController controller = new OptionsWindowController(emailManager, this, "OptionsWindow.fxml");
 
         InitializeStage(controller);
     }
 
+    /**
+     * Initializes Compose Message Window
+     */
     public void showComposeMessageWindow() {
         BaseController controller = new ComposeMessageWindowController(emailManager, this, "ComposeMessageWindow.fxml");
         composeMessageWindowController = (ComposeMessageWindowController) controller;
         InitializeStage(controller);
     }
 
+    /**
+     * Initializes MessageDetailsWindow.
+     */
     public void showMessageDetailsWindow() {
         BaseController controller = new MessageDetailsWindowController(emailManager, this, "MessageDetailsWindow.fxml");
         InitializeStage(controller);
     }
 
+    /**
+     * Initializes a Stage and add it to activeStages list.
+     * @param controller
+     */
     private void InitializeStage(BaseController controller) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(controller.getFxmlName()));
         fxmlLoader.setController(controller);
@@ -101,11 +119,19 @@ public class ViewFactory {
         activeStages.add(stage);
         updateStyles();
     }
+
+    /**
+     * Close a stage.
+     * @param stage
+     */
     public void closeStage(Stage stage) {
         stage.close();
         activeStages.remove(stage);
     }
 
+    /**
+     * Update the style of the window according to current choice of the user.
+     */
     public void updateStyles() {
         for(Stage stage: activeStages) {
             Scene scene = stage.getScene();

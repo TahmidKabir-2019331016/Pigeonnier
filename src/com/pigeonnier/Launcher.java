@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Launches the application and checks whether there is already logged-in email.
+ */
 public class Launcher extends Application {
 
     private PersistenceAccess persistenceAccess = new PersistenceAccess();
@@ -40,6 +43,10 @@ public class Launcher extends Application {
 //        viewFactory.showComposeMessageWindow();
     }
 
+    /**
+     * Executes just before the program is closing. It stores all the login into a persisted file.
+     * @throws Exception
+     */
     @Override
     public void stop() throws Exception {
         List<ValidAccount> list = new ArrayList<>();

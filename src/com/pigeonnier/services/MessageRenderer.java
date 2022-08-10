@@ -115,6 +115,7 @@ public class MessageRenderer extends Service {
         return contentType.contains("TEXT/PLAIN");
     }
 
-
-
+    public void cleanWebEngine() {
+        webEngine.load("");
+    }
 }

@@ -4,7 +4,9 @@ import com.pigeonnier.EmailManager;
 import com.pigeonnier.model.EmailAccount;
 import com.pigeonnier.services.LoginService;
 import com.pigeonnier.view.ViewFactory;
+import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -27,7 +29,8 @@ public class LoginWindowController extends BaseController implements Initializab
     private Label welcome;
     @FXML
     private CheckBox checkBox;
-
+    @FXML
+    private ProgressBar progressBar;
     @FXML
     private Button login;
     private EmailAccount emailAccount;
@@ -40,27 +43,30 @@ public class LoginWindowController extends BaseController implements Initializab
     public void initialize(URL location, ResourceBundle resources) {
 //        EmailTextField.setText("tahmidkabiraddin@yahoo.com");
 //        PasswordTextField.setText("nozxuulofqrcwxiw");
-//        EmailTextField.setText("tahmidkabiraddin@gmail.com");
-//        PasswordTextField.setText("tkmhgmvcxotmhawy");
+        EmailTextField.setText("tahmidkabiraddin@gmail.com");
+        PasswordTextField.setText("tkmhgmvcxotmhawy");
+        progressBar.setVisible(false);
+        progressBar.setStyle(" -fx-background-color: lightblue; -fx-padding: 2");
     }
 
     @FXML
     void LoginButtonAction() throws InterruptedException {
         ErrorLabel.setText("");
-        login.setVisible(false);
         System.out.println("Login Button Clicked!");
         if (isValid()) {
             emailAccount = new EmailAccount(EmailTextField.getText(), PasswordTextField.getText());
             LoginService loginService = new LoginService(emailAccount, emailManager);
             loginService.start();
+            progressBar.progressProperty().bind(loginService.progressProperty());
+            login.setVisible(false);
+            progressBar.setVisible(true);
             loginService.setOnSucceeded(event1 -> {
                 LoginResults loginResults = loginService.getValue();
-                login.setVisible(true);
                 switch (loginResults) {
                     case SUCCESS -> {
-                        if(checkBox.isSelected()) emailManager.getLoggedInList().add(emailAccount);
+                        if (checkBox.isSelected()) emailManager.getLoggedInList().add(emailAccount);
                         System.out.println("login successful!");
-                        if(!viewFactory.isMainWindowOpened()) {
+                        if (!viewFactory.isMainWindowOpened()) {
                             viewFactory.showMainWindow();
                             viewFactory.setMainWindowOpened(true);
                         }
@@ -71,6 +77,9 @@ public class LoginWindowController extends BaseController implements Initializab
                     case FAILED_BY_NETWORK -> ErrorLabel.setText("Failed by Network!");
                     case FAILED_BY_CREDENTIALS -> ErrorLabel.setText("Wrong Credentials!");
                 }
+                login.setVisible(true);
+                progressBar.setVisible(false);
+                progressBar.progressProperty().setValue(0);
             });
         }
     }

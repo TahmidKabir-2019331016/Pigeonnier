@@ -26,18 +26,14 @@
 }
 
 #login {
-    -fx-start-margin: 30px;
-    -fx-font-family: 'Poppins';
-    -fx-text-fill: #fff !important;
-    -fx-font-weight: 700;
-    -fx-background-color: #60a3bc;
-    -fx-padding: 20px;
-    -fx-border-radius: 50px;
-    -fx-content-display: inline-block;
-    -fx-border-style: none;
-    -fx-focus-traversable: all 0.4s ease 0s;
+   -fx-background-color: #2196f3;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: whitesmoke;
 }
 #login:hover {
-    -fx-background-color: black;
+    -fx-background-color: #057ee8;
     -fx-text-fill: white;
 }

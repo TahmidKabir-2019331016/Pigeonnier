@@ -119,7 +119,7 @@ public class MainWindowController extends BaseController implements Initializabl
                 }
                 messageRenderer.setEmailMessages(emailMessages);
                 messageRenderer.restart();
-            }
+            } else messageRenderer.cleanWebEngine();
         });
     }
 
@@ -127,6 +127,7 @@ public class MainWindowController extends BaseController implements Initializabl
         emailsTreeView.setOnMouseClicked(event -> {
             EmailTreeItem<String> item = (EmailTreeItem<String>) emailsTreeView.getSelectionModel().getSelectedItem();
             if (item != null) {
+                messageRenderer.cleanWebEngine();
                 for(EmailAccount emailAccount: emailManager.getEmailAccountsList()) {
                     if (emailAccount.getAddress().equals(item.getParent().getValue())) {
                         emailManager.currentEmail = emailAccount;

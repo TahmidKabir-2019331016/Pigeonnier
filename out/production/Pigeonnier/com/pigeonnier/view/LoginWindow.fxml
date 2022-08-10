@@ -4,6 +4,7 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -13,10 +14,11 @@
         <Label layoutX="53.0" layoutY="145.0" prefHeight="23.0" prefWidth="42.0" text="Email:" />
         <Label layoutX="53.0" layoutY="188.0" prefHeight="23.0" prefWidth="64.0" text="Password:" />
         <TextField fx:id="EmailTextField" layoutX="151.0" layoutY="144.0" prefHeight="26.0" prefWidth="294.0" />
-      <Label fx:id="ErrorLabel" layoutX="196.0" layoutY="389.0" />
+      <Label fx:id="ErrorLabel" alignment="CENTER" layoutX="162.0" layoutY="351.0" prefHeight="18.0" prefWidth="171.0" />
       <PasswordField fx:id="PasswordTextField" layoutX="151.0" layoutY="187.0" prefHeight="26.0" prefWidth="294.0" />
       <Label fx:id="welcome" layoutX="124.0" layoutY="47.0" prefHeight="56.0" prefWidth="329.0" styleClass="big" text="Welcome to Pigeonnier" />
       <CheckBox fx:id="checkBox" layoutX="59.0" layoutY="240.0" mnemonicParsing="false" text="Keep me logged in" />
+      <ProgressBar id="progressBar" fx:id="progressBar" layoutX="162.0" layoutY="293.0" prefWidth="200.0" progress="0.0" />
     </children>
 
 </AnchorPane>

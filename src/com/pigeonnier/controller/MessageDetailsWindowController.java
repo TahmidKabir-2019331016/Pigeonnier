@@ -114,9 +114,13 @@ public class MessageDetailsWindowController extends BaseController implements In
                 service.restart();
                 service.setOnSucceeded(event2 -> {
                     this.setStyle("-fx-background-color: lightgreen");
+                    openCurrentFile();
                 });
+            } else {
+                this.setStyle("-fx-background-color: lightgreen");
+                openCurrentFile();
             }
-            openCurrentFile();
+
         }
     }
 

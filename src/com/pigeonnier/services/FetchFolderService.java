@@ -113,6 +113,7 @@ public class FetchFolderService extends Service<Void> {
                             int messageCount = folder.getMessageCount();
                             for(int i = messageCount; i >= 0; i--) {
                                 treeItem.addMessage(folder.getMessage(i));
+//                                System.out.println(folder.getMessage(i).getSubject());
                             }
                         }
                         return null;

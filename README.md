@@ -189,4 +189,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - JavaFX for the UI framework
 - JavaMail API for email functionality
 - ControlsFX for additional UI components
-- 
